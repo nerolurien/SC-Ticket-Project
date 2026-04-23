@@ -2,16 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ticket;
-use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-/**
- * TicketSeeder
- * 
- * Seeder untuk mengisi data dummy tiket
- * Berguna untuk testing dan demo
- */
+use App\Models\User;
+use App\Models\Ticket;
 class TicketSeeder extends Seeder
 {
     /**
@@ -19,9 +13,9 @@ class TicketSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pastikan ada minimal 1 user
+        //
         $user = User::first();
-        
+
         if (!$user) {
             // Buat user demo jika belum ada
             $user = User::create([
@@ -31,26 +25,7 @@ class TicketSeeder extends Seeder
             ]);
         }
 
-        // Data tiket sample
-        $tickets = [
-            [
-                'title' => 'Bug: Halaman login tidak bisa diakses',
-                'description' => 'Ketika mencoba mengakses halaman login di /login, muncul error 500. Sudah dicoba clear cache tapi tetap sama. Browser yang digunakan Chrome versi terbaru.',
-                'status' => 'open',
-                'priority' => 'high',
-            ],
-            [
-                'title' => 'Request: Fitur export ke PDF',
-                'description' => 'Mohon ditambahkan fitur untuk export laporan ke format PDF. Fitur ini diperlukan untuk keperluan dokumentasi dan arsip.',
-                'status' => 'in_progress',
-                'priority' => 'medium',
-            ],
-            [
-                'title' => 'Perbaikan typo di halaman About',
-                'description' => 'Ada beberapa typo di halaman About Us. Contohnya "SMK Wikrama Bgor" seharusnya "SMK Wikrama Bogor".',
-                'status' => 'closed',
-                'priority' => 'low',
-            ],
+         $tickets = [
             [
                 'title' => 'Error saat upload file lebih dari 2MB',
                 'description' => 'Ketika mencoba upload file attachment dengan ukuran lebih dari 2MB, muncul pesan error "File too large". Apakah bisa ditingkatkan limitnya menjadi 10MB?',
@@ -80,4 +55,5 @@ class TicketSeeder extends Seeder
 
         $this->command->info('Created ' . count($tickets) . ' sample tickets!');
     }
+
 }

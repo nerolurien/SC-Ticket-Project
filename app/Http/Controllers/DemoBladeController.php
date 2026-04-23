@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 /**
  * DemoBladeController
- * 
+ *
  * Controller untuk mendemonstrasikan fitur-fitur Blade Templating
  * Sesuai dengan materi Hari 4 - Bagian 1
  */
@@ -38,7 +38,7 @@ class DemoBladeController extends Controller
 
         // Data tiket untuk demo loop
         $tickets = Ticket::take(5)->get();
-        
+
         // Jika belum ada tiket, buat data dummy
         if ($tickets->isEmpty()) {
             $tickets = collect([
@@ -95,7 +95,7 @@ class DemoBladeController extends Controller
     public function includes(): View
     {
         $tickets = Ticket::take(5)->get();
-        
+
         if ($tickets->isEmpty()) {
             $tickets = collect([
                 (object) ['id' => 1, 'title' => 'Bug Login', 'status' => 'open', 'priority' => 'high'],

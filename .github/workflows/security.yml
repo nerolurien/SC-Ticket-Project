@@ -1,0 +1,38 @@
+name: Security Checks
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  phpstan:
+    name: PHPStan Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan analyse app --no-progress
+
+  composer-audit:
+    name: Composer Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - name: Run Composer Audit
+        run: composer audit

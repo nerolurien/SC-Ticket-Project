@@ -1,11 +1,3 @@
-{{-- ============================================ --}}
-{{-- SECURITY CONTEXT POPUP --}}
-{{-- Modal yang menjelaskan konsep keamanan --}}
-{{-- 
-{{-- Materi Hari 5 - Lab Lengkap XSS Prevention --}}
-{{-- ============================================ --}}
-
-{{-- Security Modal --}}
 <div class="modal fade" id="securityModal" tabindex="-1" aria-labelledby="securityModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -13,7 +5,8 @@
                 <h5 class="modal-title" id="securityModalLabel">
                     <i class="bi bi-shield-lock"></i> Security Context
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 {{-- XSS Prevention --}}
@@ -43,7 +36,7 @@
                                 </tr>
                                 <tr>
                                     <td>Output Encoding</td>
-                                    <td><code>@{{ }}</code></td>
+                                    <td><code>@{{  }}</code></td>
                                     <td>Auto-escape semua output (htmlspecialchars)</td>
                                 </tr>
                                 <tr>
@@ -62,7 +55,7 @@
                         <i class="bi bi-layers"></i> Defense in Depth
                     </h6>
                     <p class="small text-muted">
-                        Kami menggunakan multiple layers of protection. Jika satu layer gagal, 
+                        Kami menggunakan multiple layers of protection. Jika satu layer gagal,
                         layer lainnya masih melindungi aplikasi.
                     </p>
                     <div class="row g-2">
@@ -112,15 +105,17 @@
                     </p>
                     <div class="bg-dark text-white p-2 rounded mb-2">
                         <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
-                        <button class="btn btn-sm btn-outline-light float-end" 
-                                onclick="navigator.clipboard.writeText('<script>alert(\'XSS\')</script>')">
+                        <button class="btn btn-sm btn-outline-light float-end"
+                            onclick="navigator.clipboard.writeText('<script>
+                                alert(\'XSS\')
+                            </script>')">
                             <i class="bi bi-clipboard"></i>
                         </button>
                     </div>
                     <div class="bg-dark text-white p-2 rounded mb-2">
                         <code>&lt;img src=x onerror=alert('XSS')&gt;</code>
-                        <button class="btn btn-sm btn-outline-light float-end" 
-                                onclick="navigator.clipboard.writeText('<img src=x onerror=alert(\'XSS\')>')">
+                        <button class="btn btn-sm btn-outline-light float-end"
+                            onclick="navigator.clipboard.writeText('<img src=x onerror=alert(\'XSS\')>')">
                             <i class="bi bi-clipboard"></i>
                         </button>
                     </div>
@@ -135,14 +130,14 @@
                     <h6 class="text-info">
                         <i class="bi bi-code-slash"></i> Contoh Kode
                     </h6>
-                    
+
                     <p class="small text-muted">Controller (Sanitization):</p>
                     <pre class="bg-light p-2 rounded small"><code>// Hapus HTML tags
 $cleanContent = strip_tags($validated['content']);</code></pre>
-                    
+
                     <p class="small text-muted mt-3">View (Output Encoding):</p>
                     <pre class="bg-light p-2 rounded small"><code>{{-- Safe: Auto-escaped --}}
-@{{ $comment->content }}
+@{{ $comment - > content }}
 
 {{-- Safe: nl2br + e() --}}
 @{!! nl2br(e($comment->content)) !!}</code></pre>
@@ -192,13 +187,10 @@ $cleanContent = strip_tags($validated['content']);</code></pre>
         bottom: 20px;
         right: 20px;
         z-index: 1050;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 </style>
-<button type="button" 
-        class="btn btn-info btn-lg rounded-circle security-floating-btn" 
-        data-bs-toggle="modal" 
-        data-bs-target="#securityModal"
-        title="Lihat Security Context">
+<button type="button" class="btn btn-info btn-lg rounded-circle security-floating-btn" data-bs-toggle="modal"
+    data-bs-target="#securityModal" title="Lihat Security Context">
     <i class="bi bi-shield-lock"></i>
 </button>

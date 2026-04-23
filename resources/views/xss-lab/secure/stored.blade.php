@@ -19,7 +19,7 @@
     <div class="alert alert-success">
         <h5><i class="bi bi-shield-check"></i> HALAMAN SECURE</h5>
         <p class="mb-0">
-            Komentar ditampilkan dengan Blade auto-escape @{{ }}. 
+            Komentar ditampilkan dengan Blade auto-escape @{{ }}.
             Script berbahaya akan ditampilkan sebagai teks biasa.
         </p>
     </div>
@@ -30,7 +30,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <h5 class="mb-0">
-                        <i class="bi bi-ticket"></i> 
+                        <i class="bi bi-ticket"></i>
                         Tiket: {{ $ticket->title ?? 'Sample Ticket' }}
                     </h5>
                 </div>
@@ -50,11 +50,11 @@
                     <form action="{{ route('xss-lab.stored.secure.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="ticket_id" value="{{ $ticket->id ?? 1 }}">
-                        
+
                         <div class="mb-3">
                             <label for="author_name" class="form-label">Nama</label>
-                            <input type="text" name="author_name" id="author_name" 
-                                   class="form-control @error('author_name') is-invalid @enderror" 
+                            <input type="text" name="author_name" id="author_name"
+                                   class="form-control @error('author_name') is-invalid @enderror"
                                    required maxlength="100"
                                    value="{{ old('author_name') }}"
                                    placeholder="Masukkan nama Anda">
@@ -62,18 +62,18 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="content" class="form-label">Komentar</label>
-                            <textarea name="content" id="content" rows="3" 
-                                      class="form-control @error('content') is-invalid @enderror" 
+                            <textarea name="content" id="content" rows="3"
+                                      class="form-control @error('content') is-invalid @enderror"
                                       required maxlength="1000"
                                       placeholder="Tulis komentar Anda...">{{ old('content') }}</textarea>
                             @error('content')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-send"></i> Kirim Komentar
                         </button>
@@ -85,7 +85,7 @@
             <div class="card border-success">
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">
-                        <i class="bi bi-chat-left-text"></i> 
+                        <i class="bi bi-chat-left-text"></i>
                         Komentar ({{ $comments->count() }})
                     </h5>
                 </div>
@@ -94,7 +94,7 @@
                         <div class="border-bottom pb-3 mb-3">
                             <div class="d-flex justify-content-between">
                                 <strong>
-                                    {{-- ✅ SECURE! Auto-escape dengan {{ }} --}}
+
                                     {{ $comment->author_name }}
                                 </strong>
                                 <small class="text-muted">
@@ -102,8 +102,7 @@
                                 </small>
                             </div>
                             <div class="mt-2">
-                                {{-- ✅ SECURE! Auto-escape dengan {{ }} --}}
-                                {{-- nl2br + e() untuk preserve line breaks dengan aman --}}
+      
                                 {!! nl2br(e($comment->content)) !!}
                             </div>
                         </div>
@@ -125,7 +124,7 @@
     &lt;div&gt;
         {{-- ✅ SECURE! Auto-escape --}}
         &lt;strong&gt;@{{ $comment->author_name }}&lt;/strong&gt;
-        
+
         {{-- ✅ SECURE! nl2br() + e() untuk line breaks --}}
         &lt;p&gt;{!! nl2br(e($comment->content)) !!}&lt;/p&gt;
     &lt;/div&gt;
@@ -166,18 +165,18 @@ Comment::create($validated);
                 </div>
                 <div class="card-body">
                     <p>Coba submit payload yang sama:</p>
-                    
+
                     <div class="mb-3">
                         <code class="d-block bg-light p-2 rounded small">
                             &lt;script&gt;alert('XSS')&lt;/script&gt;
                         </code>
                     </div>
-                    
+
                     <hr>
-                    
+
                     <div class="alert alert-success small mb-0">
                         <i class="bi bi-check-circle"></i>
-                        <strong>Aman!</strong> Script akan ditampilkan 
+                        <strong>Aman!</strong> Script akan ditampilkan
                         sebagai TEKS biasa, tidak dieksekusi.
                     </div>
                 </div>
